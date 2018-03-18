@@ -1,3 +1,7 @@
+# !!! NOTICE !!!
+
+This is just a fork of the original repository for experimentation on a personal project. Please go to the original author's repository for the correct version: https://github.com/131/h264-live-player
+
 # Motivation
 
 This is a very simple h264 video player (that can run on live stream) for your browser.
