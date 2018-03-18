@@ -2,13 +2,12 @@
 
 /**
 * Run this on a raspberry pi 
-* then browse (using google chrome/firefox) to http://[pi ip]:8080/
+* then browse (using google chrome/firefox) to http://[pi ip]:[port]/
 */
 
-
+const config  = require('config');
 const http    = require('http');
 const express = require('express');
-
 
 const WebStreamerServer = require('./lib/raspivid');
 
@@ -21,4 +20,4 @@ app.use(express.static(__dirname + '/vendor/dist'));
 const server  = http.createServer(app);
 const silence = new WebStreamerServer(server);
 
-server.listen(8080);
+server.listen(config.port);

@@ -9,22 +9,24 @@
     <button type="button" onclick="wsavc.disconnect()">Disconnect</button>
     <br/>
 
-  <!-- provide WSAvcPlayer -->
+    <!-- provide WSAvcPlayer -->
     <script type="text/javascript" src="http-live-player.js">;</script>
     <script type="text/javascript">
 
-var canvas = document.createElement("canvas");
-document.body.appendChild(canvas);
+    // Create canvas to host player in
+    var canvas = document.createElement("canvas");
+    document.body.appendChild(canvas);
 
-// Create h264 player
-var uri = "ws://" + document.location.host;
-var wsavc = new WSAvcPlayer(canvas, "webgl", 1, 35);
-wsavc.connect(uri);
+    // Create h264 player
+    var uri = "ws://" + document.location.host;
+    var wsavc = new WSAvcPlayer(canvas, "webgl", 1, 35);
+    wsavc.connect(uri);
 
+    //expose instance for button callbacks
+    window.wsavc = wsavc;
 
-//expose instance for button callbacks
-window.wsavc = wsavc;
-
+    // Start stream by default
+    wsavc.playStream();
     </script>
   </body>
 </html>
