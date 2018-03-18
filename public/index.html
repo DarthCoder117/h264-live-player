@@ -1,13 +1,33 @@
 <html>
   <head>
-    <title>h264-live-player web client demo</title>
+    <title>Spycam live stream</title>
+
+    <style>
+      body {
+        margin: 0px;
+      }
+
+      #videoStream {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      #controls {
+        z-index: 200;
+        position: absolute;
+        top: 2em;
+        left: 2em;
+      }
+    </style>
   </head>
   <body>
 
-    <button type="button" onclick="wsavc.playStream()">Start Video</button>
-    <button type="button" onclick="wsavc.stopStream()">Stop Video</button>
-    <button type="button" onclick="wsavc.disconnect()">Disconnect</button>
-    <br/>
+    <div id="controls">
+      <button type="button" onclick="wsavc.playStream()">Start Video</button>
+      <button type="button" onclick="wsavc.stopStream()">Stop Video</button>
+      <button type="button" onclick="wsavc.disconnect()">Disconnect</button>
+    </div>
 
     <!-- provide WSAvcPlayer -->
     <script type="text/javascript" src="http-live-player.js">;</script>
@@ -15,6 +35,7 @@
 
     // Create canvas to host player in
     var canvas = document.createElement("canvas");
+    canvas.id = "videoStream";
     document.body.appendChild(canvas);
 
     // Create h264 player
@@ -26,7 +47,11 @@
     window.wsavc = wsavc;
 
     // Start stream by default
-    wsavc.playStream();
+    try {
+      wsavc.playStream();
+    } catch (err) {
+      console.log("Play error:", err);
+    }
     </script>
   </body>
 </html>
