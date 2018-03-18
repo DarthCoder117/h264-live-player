@@ -5,7 +5,7 @@
 * then browse (using google chrome/firefox) to http://[pi ip]:[port]/
 */
 
-const config  = require('config');
+const config  = require('./config');
 const http    = require('http');
 const express = require('express');
 
