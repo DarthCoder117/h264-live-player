@@ -55,7 +55,7 @@ var WSAvcPlayer = new Class({
     this.avc.decode(data);
   },
 
-  connect : function(url, onOpen) {
+  connect : function(url) {
 
     // Websocket initialization
     if (this.ws != undefined) {
@@ -67,9 +67,7 @@ var WSAvcPlayer = new Class({
 
     this.ws.onopen = () => {
       log("Connected to " + url);
-      if (onOpen) onOpen();
     };
-
 
     var framesList = [];
 

@@ -10,48 +10,51 @@
     <style>
       body {
         margin: 0px;
+        padding: 0px;
+      }
+
+      streamContainer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
       }
 
       #videoStream {
-        width: 100vw;
-      }
-
-      #controls {
-        z-index: 200;
-        position: absolute;
-        top: 2em;
-        left: 2em;
+        width: 100%;
+        height: auto;
       }
     </style>
   </head>
   <body>
 
-    <div id="controls">
-      <button type="button" onclick="wsavc.playStream()">Start Video</button>
-      <button type="button" onclick="wsavc.stopStream()">Stop Video</button>
-      <button type="button" onclick="wsavc.disconnect()">Disconnect</button>
-    </div>
+    <div id="streamContainer"></div>
 
     <!-- provide WSAvcPlayer -->
     <script type="text/javascript" src="http-live-player.js">;</script>
     <script type="text/javascript">
 
     // Create canvas to host player in
-    var canvas = document.createElement("canvas");
+    var canvas = document.getElementById("streamContainer").createElement("canvas");
     canvas.id = "videoStream";
     document.body.appendChild(canvas);
 
     // Create h264 player
     var uri = "wss://" + document.location.host;
     var wsavc = new WSAvcPlayer(canvas, "webgl", 1, 35);
-    wsavc.connect(uri, () => {
-      // Start stream once websocket connects
-      console.log('Websocket connected, starting stream');
-      wsavc.playStream();
-    });
+    wsavc.connect(uri);
 
     //expose instance for button callbacks
     window.wsavc = wsavc;
+
+    // Try starting the stream a few times until it succeeds
+    var interval = setInterval(() => {
+      try {
+        wsavc.playStream();
+        clearInterval(interval);
+      } catch(err) {}
+    }, 1000);
     </script>
   </body>
 </html>
