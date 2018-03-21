@@ -36,9 +36,9 @@
     <script type="text/javascript">
 
     // Create canvas to host player in
-    var canvas = document.getElementById("streamContainer").createElement("canvas");
+    var canvas = document.createElement("canvas");
     canvas.id = "videoStream";
-    document.body.appendChild(canvas);
+    document.getElementById("streamContainer").appendChild(canvas);
 
     // Create h264 player
     var uri = "wss://" + document.location.host;
