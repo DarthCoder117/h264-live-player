@@ -1,7 +1,12 @@
 <html>
   <head>
     <title>Spycam live stream</title>
-
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous">
+    </script>
+    
     <style>
       body {
         margin: 0px;
@@ -39,17 +44,13 @@
     // Create h264 player
     var uri = "wss://" + document.location.host;
     var wsavc = new WSAvcPlayer(canvas, "webgl", 1, 35);
-    wsavc.connect(uri);
+    wsavc.connect(uri, () => {
+      // Start stream once websocket connects
+      wsavc.playStream();
+    });
 
     //expose instance for button callbacks
     window.wsavc = wsavc;
-
-    // Start stream by default
-    try {
-      wsavc.playStream();
-    } catch (err) {
-      console.log("Play error:", err);
-    }
     </script>
   </body>
 </html>
