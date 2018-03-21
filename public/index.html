@@ -46,6 +46,7 @@
     var wsavc = new WSAvcPlayer(canvas, "webgl", 1, 35);
     wsavc.connect(uri, () => {
       // Start stream once websocket connects
+      console.log('Websocket connected, starting stream');
       wsavc.playStream();
     });
 

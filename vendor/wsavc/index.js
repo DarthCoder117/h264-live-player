@@ -67,7 +67,7 @@ var WSAvcPlayer = new Class({
 
     this.ws.onopen = () => {
       log("Connected to " + url);
-      onOpen && onOpen();
+      if (onOpen) onOpen();
     };
 
 
